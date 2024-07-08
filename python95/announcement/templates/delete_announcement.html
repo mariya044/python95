@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+<h2>Are you sure you want to delete this announcement ?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-success" type="submit">Delete</button>
+     <a  href="{% url "announcements" %}">Back</a>
+</form>
+</div>
+
+{% endblock %}

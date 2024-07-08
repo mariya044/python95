@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+<div  class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <h3 style="color: black">Name:{{announcement.first_name}} </h3>
+            <h3 style="color: black">Form:{{announcement.form}} </h3>
+            <h3 style="color: black">Age:{{announcement.age}} </h3>
+            <h3 style="color: black">City:{{announcement.city}} </h3>
+            <h3 style="color: black">Addres:{{announcement.address}} </h3>
+            <h3 style="color: black">Price:{{announcement.price_limit_from}} - {{announcement.price_limit_to}}{{announcement.currency}}</h3>
+            <h3 style="color: black">Online lessons:{{announcement.online_lessons}} </h3>
+            <h3 style="color: black">Offline lessons:{{announcement.offline_lessons}} </h3>
+            <h3 style="color: black">Lessons at home :{{announcement.lessons_at_home}} </h3>
+            <h3 style="color: black">Level of knowledge:{{announcement.level_of_knowledge}} </h3>
+            <h3 style="color: black">Phone number:{{announcement.phone_number}} </h3>
+            <h3 style="color: black">Subject:{{announcement.subject}} </h3>
+        </div>
+        {% if  announcement.user == request.user %}
+    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "edit_announcement" announcement_id=announcement.id %}">Edit</a></button>
+    {% endif %}
+    </div>
+</div>
+
+{% endblock %}

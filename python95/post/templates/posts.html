@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+{% for post in all_posts %}
+<div class="container" >
+    {% if perms.post.add_post %}
+         <button type="submit" class="nav-link btn btn-link"></button>
+                 <style="display: inline; border: none; background: none; box-shadow: none;" ><a  style="color:black"  href="{% url 'create' %}">Add post</a></button>
+         <link rel="shortcut icon" href="#" />
+          {% endif %}
+    <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+               <img class="img-article-left" src="{{post.image.url}}" width="300px"  height=320" align="left" />
+              <h1 class="card-text">{{post.first_name}} {{post.second_name}}</h1>
+                <h3>Subject: {{post.subject}}</h3>
+                <h3>qualification: {{post.qualification}}</h3>
+                <h3>Address: {{post.address}}</h3>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "posts" post_id=post.id %}" style="color:black">View</a></button>
+              </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+{% endfor %}
+<div class ="container">{% include "pagination.html" with page=all_posts %}</div>
+{% endblock %}

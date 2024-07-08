@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+<div  class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <h1 style="color: black">{{post.first_name}} {{post.second_name}}</h1>
+            <p style="color: black" ><img src="{{post.image.url}}"align="left" width="300",height="620" />
+            <br>
+
+            Subject:{{post.subject}}
+                <br>
+            Information about:{{post.about}}
+                <br>
+             Qualifications:{{post.qualification}}
+                <br>
+                Work experience:{{post.work_experience}},{{post.organizations}}
+                <br>
+                Teachers address: {{post.address}}
+                <br>
+                Online lessons: {{post.online_lessons}}
+                <br>
+                Offline lessons : {{post.offline_lessons}}
+                <br>
+                Lessons at teachers place:{{post.lessons_at_home}}
+                <br>
+                Price:{{post.price}}{{post.currency}} for {{post.time_of_lesson}}minutes
+                <br>
+                Additional information:{{post.add_information}}
+            </p>
+            {% if post.user == request.user %}
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "edit_post" post_id=post.id %}" style="color:black">Edit</a></button>
+                    {% endif %}
+
+
+
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="shortcut icon" href="#" />
+<div class="container">
+     <h2>announcement</h2>
+<form method="post" class="post-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <link rel="icon" href="media/images/favicon.ico">
+    <button type="subbmit" class="save bth-default">Save</button>
+</form>
+</div>
+{% endblock %}

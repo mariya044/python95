@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <h1 align="center">Personal account</h1>
+        {% for user in users %}
+        <h3>Username:{{user.username}}</h3>
+        <h3>Email:{{user.email}}</h3>
+        {% endfor %}
+        {% for ann in announcement %}
+        <div class="card shadow-sm">
+        <h1>{{ann.first_name}}</h1>
+                <h3>Grade: {{ann.form}}</h3>
+                <h3>City: {{ann.city}}</h3>
+                <h3>Price:{{ann.price_limit_from}}-{{ann.price_limit_to}}</h3>
+                <h3>Level: {{ann.level_of_knowledge}}</h3>
+        {% endfor %}
+        {%for post in posts %}
+                                 <h1 align="left" >My Posts:</h1>
+                            <div class="card shadow-sm">
+               <img class="img-article-left" src="{{post.image.url}}" width="300px"  height=320" align="left" />
+              <h1 class="card-text">{{post.first_name}} {{post.second_name}}</h1>
+                <h3>Subject: {{post.subject}}</h3>
+                <h3>qualification: {{post.qualification}}</h3>
+                <h3>Address: {{post.address}}</h3>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "posts" post_id=post.id %}" style="color:black">View</a></button>
+              </div>
+
+        </div>
+        {% endfor %}
+
+        </form>
+    </div>
+{% endblock %}
