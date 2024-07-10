@@ -1,7 +1,9 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-
-
 from post.models import Post
 
-admin.site.register(Post)
+
+class PostAdmin(admin.ModelAdmin):
+    fields = ['first_name', 'subject']
+
+
+admin.site.register(Post, PostAdmin)

@@ -3,33 +3,32 @@ from django.db import models
 from user.models import NewUser
 
 
+class Subject(models.Model):
+    subject = models.CharField(max_length=100, null=False, blank=False)
+
+    def __str__(self):
+        return self.subject
+
+
 class Announcement(models.Model):
     CHOICES = (
         ('+', "+"),
         ("-", "-")
     )
     LEVELS=(
-    ('Начальный',"Начальный'"),
-    ("Средний","Средний"),
-    ("Продвинутый","Продвинутый"),
+    ('Elementary(A1)',"Elementary(A1"),
+    ("Pre-Intermediate(A2)","Pre-Intermediate(A2"),
+    ("Intermediate(B1)","Intermediate(B1)"),
+    ('Upper-Intermediate(B2)','Upper-Intermediate(B2)'),
+    ('Advanced(C1,C2)','Advanced(C2)'),
     )
     CURRENCY = (
         ("USD", "USD"),
         ("BYN", "BYN"),
         ("RUB", "RUB"),
     )
-    SUBJECTS=(
-        ('English',"English"),
-        ("Russian","Russian"),
-        ("Math","Math"),
-        ("History","History"),
-        ('Belarusian',"Belarusian"),
-        ('Chemistry',"Chemistry"),
-        ('Physics',"Physics")
-    )
     first_name=models.CharField(max_length=50,null=False, blank=False)
     form=models.IntegerField(null=True, blank=True)
-    subject = models.CharField(max_length=100, choices=SUBJECTS, default="English", null=False, blank=False)
     age=models.IntegerField(null=False, blank=False)
     city=models.CharField(max_length=50,null=False, blank=False)
     address=models.CharField(max_length=150,null=False, blank=False)
@@ -42,3 +41,4 @@ class Announcement(models.Model):
     phone_number=models.CharField(null=True, blank=True)
     user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
     currency = models.CharField(max_length=100, choices=CURRENCY, default="BYN", null=False, blank=False)
+    subject=models.ForeignKey(Subject,on_delete=models.CASCADE)

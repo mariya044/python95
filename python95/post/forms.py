@@ -18,7 +18,8 @@ class PostForm(forms.ModelForm):
                   "price",
                   "currency",
                   "time_of_lesson",
-                  "add_information",)
+                  "add_information",
+                  'phone_number',)
 
 
 

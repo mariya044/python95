@@ -10,7 +10,7 @@
                     {% block add %}{% endblock %}
                   {% if user.is_authenticated %}
            <button type="submit" class="nav-link btn btn-link">
-                 <style="display: inline; border: none; background: none; box-shadow: none;" ><a  style="color:black"  href="{% url 'posts' %}">Teachers posts</a></button>
+                 <style="display: inline; border: none; background: none; box-shadow: none;" ><a  style="color:black"  href="{% url 'post:posts' %}">Teachers posts</a></button>
          <button type="submit" class="nav-link btn btn-link">
              <style="display: inline; border: none; background: none; box-shadow: none;" ><a  style="color:black"  href="{% url 'announcements' %}">Students anouncement</a></button>
         {% endif %}

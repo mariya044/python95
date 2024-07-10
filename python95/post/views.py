@@ -6,26 +6,31 @@ from django.views.generic import DeleteView
 from post.forms import PostForm
 from post.models import Post
 
+from announcement.models import Subject
 
 
 @login_required
-def posts(request):
-    search_query = request.GET.get("search", "")
-    if search_query:
-        posts = Post.objects.filter(title__icontains=search_query)
-    else:
-        posts = Post.objects.all().order_by("id")
-    all_images = Post.objects.all()
-    paginator = Paginator(posts, 2)
-    page_number = request.GET.get('page', 1)
+def posts(request,subject_id=None):
+ if subject_id:
+     post=Post.objects.filter(subject_id=subject_id)
+ else:
+     post=Post.objects.all()
+ paginator = Paginator(post, 2)
+ page_number = request.GET.get('page', 1)
+ try:
+     posts = paginator.page(page_number)
+ except PageNotAnInteger:
+     posts = paginator.page(1)
+ except EmptyPage:
+     posts = paginator.page(paginator.num_pages)
 
-    try:
-        all_posts = paginator.page(page_number)
-    except PageNotAnInteger:
-        all_posts = paginator.page(1)
-    except EmptyPage:
-        all_posts = paginator.page(paginator.num_pages)
-    return render(request, "posts.html", {"all_posts": all_posts, "all_images": all_images})
+ context={
+     'subjects':Subject.objects.all(),
+     'posts':posts,
+
+ }
+ return render(request,"posts.html",context)
+
 
 
 @login_required

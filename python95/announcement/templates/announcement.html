@@ -6,6 +6,9 @@
                  <style="display: inline; border: none; background: none; box-shadow: none;" ><a  style="color:black"  href="{% url 'create_announcement' %}">Add announcement</a></button>
          <link rel="shortcut icon" href="#" />
           {% endif %}
+     {%  for subject in subjects %}
+<a href="{%  url 'post:subject' subject.id %}">{{ subject.subject }}</a>
+{%  endfor%}
     <div class="col">
         {% for announcement in announcements %}
           <div class="card shadow-sm">

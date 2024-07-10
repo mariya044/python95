@@ -3,8 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import Group
-from django.core import mail
-from django.core.mail import send_mail
+from . tasks import send_spam_email
 from django.shortcuts import render, redirect
 from user.models import NewUser
 from user.forms import UserRegisterForm
@@ -24,16 +23,10 @@ def register(request):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
-            email = request.POST.get('email')
             user_group = Group.objects.get(name=form.cleaned_data['groups'])
             user.groups.add(user_group)
-            send_mail(
-                'hellow',
-                'thanks for registration',
-                'mariabycek2@gmail.com',
-                [email],
-                fail_silently=False,
-            )
+            send_spam_email.delay(form.instance.email)
+
             return redirect("login")
     else:
         form = UserRegisterForm()

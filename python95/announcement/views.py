@@ -8,9 +8,15 @@ from announcement.models import Announcement
 
 from announcement.forms import StudentAnnouncementForm
 
+from announcement.models import Subject
+
+
 @login_required()
-def announcement(request):
-    announcement = Announcement.objects.all().order_by('id')
+def announcement(request,subject_id=None):
+    if subject_id:
+        announcement = Announcement.objects.filter(subject_id=subject_id)
+    else:
+        announcement = Announcement.objects.all()
     paginator=Paginator(announcement,2)
     page_number=request.GET.get('page',1)
     try:
@@ -19,7 +25,14 @@ def announcement(request):
         announcements=paginator.page(1)
     except EmptyPage:
         announcements=paginator.page(paginator.num_pages)
-    return render(request, "announcement.html", {"announcements": announcements})
+    context = {
+        'subjects': Subject.objects.all(),
+        'announcements': announcements,
+
+    }
+
+    return render(request, "announcement.html", context)
+
 
 @login_required()
 def announcement_detail(request,announcement_id):

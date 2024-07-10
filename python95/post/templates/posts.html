@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-{% for post in all_posts %}
+
 <div class="container" >
     {% if perms.post.add_post %}
          <button type="submit" class="nav-link btn btn-link"></button>
-                 <style="display: inline; border: none; background: none; box-shadow: none;" ><a  style="color:black"  href="{% url 'create' %}">Add post</a></button>
+        <style="display: inline; border: none; background: none; box-shadow: none;" ><a  style="color:black"  href="{% url 'post:create' %}">Add post</a></style></button>
          <link rel="shortcut icon" href="#" />
           {% endif %}
+ {%  for subject in subjects %}
+<a href="{%  url 'post:subject' subject.id %}">{{ subject.subject }}</a>
+{%  endfor%}
+{% for post in posts %}
     <div class="col">
           <div class="card shadow-sm">
             <div class="card-body">
@@ -17,15 +21,16 @@
                 <h3>Address: {{post.address}}</h3>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "posts" post_id=post.id %}" style="color:black">View</a></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "post:posts" post_id=post.id %}" style="color:black">View</a></button>
               </div>
-
+              </div>
               </div>
             </div>
           </div>
         </div>
+    {%  empty %}
 
 
 {% endfor %}
-<div class ="container">{% include "pagination.html" with page=all_posts %}</div>
+<div class ="container">{% include "pagination.html" with page=posts %}</div>
 {% endblock %}
