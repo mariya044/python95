@@ -1,0 +1,6 @@
+<h2>Add a new comments</h2>
+<form  method="post" action="{% url 'post:post_comment' post.id%}  ">
+    {{ form.as_p }}
+{% csrf_token %}
+<p><input type="submit" value="Add comment"></p>
+</form>
