@@ -42,7 +42,7 @@
         {%  for comment in comments  %}
         <div class="comment">
             <p class="info">
-            <h3>Comment{{forloop.counter }} by {{ comment.name }}</h3>
+            <h3><i class="bi bi-chat-right-text"></i>Comment{{forloop.counter }} by {{ comment.name }}</h3>
                 {{ comment.created }}
             </p>
             {{ comment.body|linebreaks }}

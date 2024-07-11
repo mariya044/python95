@@ -7,10 +7,23 @@
         <style="display: inline; border: none; background: none; box-shadow: none;" ><a  style="color:black"  href="{% url 'post:create' %}">Add post</a></style></button>
          <link rel="shortcut icon" href="#" />
           {% endif %}
- {%  for subject in subjects %}
-<a href="{%  url 'post:subject' subject.id %}">{{ subject.subject }}</a>
+<br>
+<style>
+    div.flex{
+    display:flex;
+    text-align:left;
+        border-spacing: 1000px;
+    }
+</style>
+    <div class="flex">
+    <p>filter:</p>
+     {%  for subject in subjects %}
+         <a href="{%  url 'post:subject' subject.id %}" style="color:black"> {{ subject.subject }} </a>
 {%  endfor%}
+    </div>
+</div>
 {% for post in posts %}
+    <div class="container">
     <div class="col">
           <div class="card shadow-sm">
             <div class="card-body">
@@ -24,6 +37,7 @@
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "post:posts" post_id=post.id %}" style="color:black">View</a></button>
               </div>
               </div>
+            </div>
               </div>
             </div>
           </div>

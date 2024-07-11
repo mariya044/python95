@@ -3,7 +3,7 @@ from announcement.models import Announcement, Subject
 
 
 class AnnouncementAdmin(admin.ModelAdmin):
-    fields = ['first_name', 'second_name', "subject"]
+    fields = ['first_name', "subject"]
 
 
 admin.site.register(Announcement, AnnouncementAdmin)

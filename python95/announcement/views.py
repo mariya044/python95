@@ -26,8 +26,8 @@ def announcement(request,subject_id=None):
     except EmptyPage:
         announcements=paginator.page(paginator.num_pages)
     context = {
-        'subjects': Subject.objects.all(),
-        'announcements': announcements,
+        'subject': Subject.objects.all(),
+        'announcement': announcement,
 
     }
 

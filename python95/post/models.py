@@ -40,6 +40,9 @@ class Post(models.Model):
     user= models.ForeignKey(NewUser, on_delete=models.CASCADE)
     phone_number=models.CharField(max_length=15, null=False, blank=False)
 
+    def __str__(self):
+        return self.second_name
+
 
 class Comment(models.Model):
     post=models.ForeignKey(Post,on_delete=models.Model,related_name='comments')

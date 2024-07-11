@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import Group
+from django.core.mail import send_mail
+
 from . tasks import send_spam_email
 from django.shortcuts import render, redirect
 from user.models import NewUser
@@ -23,10 +25,16 @@ def register(request):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
+            email=request.POST.get('email')
             user_group = Group.objects.get(name=form.cleaned_data['groups'])
             user.groups.add(user_group)
-            send_spam_email.delay(form.instance.email)
-
+            send_mail(
+                'Welcome',
+                f'Nice to meet you {user}!',
+                'EMAIL_HOST_USER',
+                [email],
+                fail_silently=False
+            )
             return redirect("login")
     else:
         form = UserRegisterForm()
@@ -43,7 +51,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"hellow{username}")
-                return redirect('posts')
+                return redirect('post:posts')
             else:
                 messages.info(request, "Username or password is not  correct ")
         else:
@@ -60,6 +68,7 @@ def custom_logout(request):
 
 def register_done(request):
     return render (request,"register_done.html")
+
 
 def account(request):
     context={

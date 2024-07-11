@@ -42,3 +42,7 @@ class Announcement(models.Model):
     user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
     currency = models.CharField(max_length=100, choices=CURRENCY, default="BYN", null=False, blank=False)
     subject=models.ForeignKey(Subject,on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.first_name
