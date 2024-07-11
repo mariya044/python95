@@ -30,10 +30,27 @@
                 Additional information:{{post.add_information}}
             </p>
             {% if post.user == request.user %}
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "edit_post" post_id=post.id %}" style="color:black">Edit</a></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "post:edit_post" post_id=post.id %}" style="color:black">Edit</a></button>
                     {% endif %}
 
+{%  with comments.count as total_comments %}
+        <h2>
+            {{total_comments}} comment{{ total_comments|pluralize }}
 
+        </h2>
+        {%  endwith %}
+        {%  for comment in comments  %}
+        <div class="comment">
+            <p class="info">
+            <h3><i class="bi bi-chat-right-text"></i>Comment{{forloop.counter }} by {{ comment.name }}</h3>
+                {{ comment.created }}
+            </p>
+            {{ comment.body|linebreaks }}
+        </div>
+        {%  empty %}
+        <p>There are no comments </p>
+        {%  endfor %}
+        {%  include 'comment_form.html' %}
 
 
     </div>

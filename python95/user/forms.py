@@ -13,7 +13,7 @@ class UserRegisterForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['username', "email", "first_name", "last_name", "password","groups"]
+        fields = ['username', "email", "password", "groups"]
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -27,4 +27,3 @@ class UserRegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-

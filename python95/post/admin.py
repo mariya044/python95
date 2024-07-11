@@ -1,7 +1,16 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
+from post.models import Post, Comment
 
 
-from post.models import Post
+class PostAdmin(admin.ModelAdmin):
+    fields = ['first_name', 'subject']
 
-admin.site.register(Post)
+
+admin.site.register(Post, PostAdmin)
+
+
+@admin.register(Comment)
+class Comment(admin.ModelAdmin):
+    list_display = ['name', 'post']
+    list_filter = ['active', 'created']
+    search_fields = ['name', 'body']

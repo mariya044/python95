@@ -19,7 +19,7 @@
             <h3 style="color: black">Subject:{{announcement.subject}} </h3>
         </div>
         {% if  announcement.user == request.user %}
-    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "edit_announcement" announcement_id=announcement.id %}">Edit</a></button>
+    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url "announcement:edit_announcement" announcement_id=announcement.id %}">Edit</a></button>
     {% endif %}
     </div>
 </div>

@@ -6,7 +6,7 @@
     {% csrf_token %}
     {{form.as_p}}
     <button type="subbmit" class="save bth-default">Save</button>
-    <a href="{% url "delete_announcement" announcement.id %}">Delete</a>
+    <a href="{% url "announcement:delete_announcement" announcement.id %}">Delete</a>
 
 </form>
 </div>
