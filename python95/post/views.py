@@ -47,12 +47,11 @@ def create(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user
             post.save()
             form.save_m2m()
-            return redirect("posts")
+            return redirect("post:posts")
         else:
-            return redirect("posts")
+            return redirect("post:posts")
     else:
         form = PostForm()
     return render(request, "create.html", {"form": form})
@@ -69,13 +68,13 @@ def edit_post(request, post_id):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
-        return redirect("posts")
+        return redirect("post:posts")
     return render(request, "edit_post.html", {"form": form, "post": post})
 
 
 class PostDeleteView(DeleteView):
     model = Post
-    success_url = reverse_lazy("posts")
+    success_url = reverse_lazy("post:posts")
     template_name = "delete_post.html"
 
 

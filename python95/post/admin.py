@@ -3,7 +3,7 @@ from post.models import Post, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
-    fields = ['first_name', 'subject']
+    fields = ['first_name', 'subject','username']
 
 
 admin.site.register(Post, PostAdmin)
