@@ -3,22 +3,21 @@ from announcement.models import Subject
 from user.models import NewUser
 
 
-
 class Post(models.Model):
-    CHOICES=(
-        ('+',"+"),
-        ("-","-")
+    CHOICES = (
+        ('+', "+"),
+        ("-", "-")
     )
-    TIME=(
-        ('30',"30"),
-        ("45","45"),
-        ("60","60"),
-        ("90","90"),
+    TIME = (
+        ('30', "30"),
+        ("45", "45"),
+        ("60", "60"),
+        ("90", "90"),
     )
-    CURRENCY=(
-        ("USD","USD"),
-        ("BYN","BYN"),
-        ("RUB","RUB"),
+    CURRENCY = (
+        ("USD", "USD"),
+        ("BYN", "BYN"),
+        ("RUB", "RUB"),
     )
 
     image = models.ImageField(null=False, blank=False, upload_to="images")
@@ -37,8 +36,8 @@ class Post(models.Model):
     time_of_lesson = models.CharField(choices=TIME, default="60", null=False, blank=False, max_length=100)
     add_information = models.CharField(max_length=100, null=True, blank=True)
     currency = models.CharField(max_length=100, choices=CURRENCY, default="BYN", null=False, blank=False)
-    user= models.ForeignKey(NewUser, on_delete=models.CASCADE)
-    phone_number=models.CharField(max_length=15, null=False, blank=False)
+    user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    phone_number = models.CharField(max_length=15, null=False, blank=False)
 
     def __str__(self):
         return self.second_name

@@ -1,11 +1,11 @@
 from django import forms
-from post.models import Post,Comment
+from post.models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("image","first_name","second_name",
+        fields = ("image", "first_name", "second_name",
                   "subject",
                   "about",
                   "qualification",

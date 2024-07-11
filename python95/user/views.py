@@ -1,21 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail
-
-from . tasks import send_spam_email
 from django.shortcuts import render, redirect
 from user.models import NewUser
 from user.forms import UserRegisterForm
 from announcement.models import Announcement
 from post.models import Post
-
-
-def users(request):
-    users = NewUser.objects.all()
-    return render(request, 'users.html', {"users": users})
 
 
 def register(request):
@@ -25,7 +17,7 @@ def register(request):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
-            email=request.POST.get('email')
+            email = request.POST.get('email')
             user_group = Group.objects.get(name=form.cleaned_data['groups'])
             user.groups.add(user_group)
             send_mail(
@@ -61,19 +53,14 @@ def login_request(request):
 
 
 def custom_logout(request):
-        logout(request)
-        return redirect ("login")
-
-
-
-def register_done(request):
-    return render (request,"register_done.html")
+    logout(request)
+    return redirect("login")
 
 
 def account(request):
-    context={
-        "announcements":Announcement.objects.filter(user=request.user),
-        "posts":Post.objects.filter(user=request.user),
-        "users":NewUser.objects.filter(email=request.user)
+    context = {
+        "announcements": Announcement.objects.filter(user=request.user),
+        "posts": Post.objects.filter(user=request.user),
+        "users": NewUser.objects.filter(email=request.user)
     }
-    return render (request,'account.html',context)
+    return render(request, 'account.html', context)

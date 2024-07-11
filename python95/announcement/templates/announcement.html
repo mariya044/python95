@@ -7,21 +7,12 @@
          <link rel="shortcut icon" href="#" />
           {% endif %}
     <br>
-<style>
-    div.flex{
-    display:flex;
-    text-align:left;
-        border-spacing: 1000px;
-    }
-</style>
-    <div class="flex">
-    <p>filter:</p>
      {%  for subject in subject %}
          <a href="{%  url 'announcement:subject' subject.id %}" style="color:black"> {{ subject.subject }} </a>
 {%  endfor%}
     </div>
     <div class="col">
-        {% for announcement in announcement %}
+        {% for announcement in announcements %}
           <div class="card shadow-sm">
             <div class="card-body">
               <h1 class="card-text">{{announcement.first_name}}</h1>
