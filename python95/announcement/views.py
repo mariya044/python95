@@ -45,9 +45,9 @@ def add_announcement(request):
             ann.user = request.user
             ann.save()
             form.save_m2m()
-            return redirect("announcements")
+            return redirect("announcement:announcements")
         else:
-            return redirect("announcements")
+            return redirect("announcement:announcements")
     else:
         form = StudentAnnouncementForm()
     return render(request, "add_announcement.html", {"form": form})
@@ -64,11 +64,11 @@ def edit_announcement(request, announcement_id):
         form = StudentAnnouncementForm(request.POST, instance=announcement)
         if form.is_valid():
             form.save()
-        return redirect("announcements")
+        return redirect("announcement:announcements")
     return render(request, "edit_announcement.html", {"form": form, "announcement": announcement})
 
 
 class AnnouncementDeleteView(DeleteView):
     model = Announcement
-    success_url = reverse_lazy("announcements")
+    success_url = reverse_lazy("announcement:announcements")
     template_name = "delete_announcement.html"

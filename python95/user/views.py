@@ -59,7 +59,7 @@ def custom_logout(request):
 
 def account(request):
     context = {
-        "announcements": Announcement.objects.filter(user=request.user),
+        "announcement": Announcement.objects.filter(user=request.user),
         "posts": Post.objects.filter(user=request.user),
         "users": NewUser.objects.filter(email=request.user)
     }
